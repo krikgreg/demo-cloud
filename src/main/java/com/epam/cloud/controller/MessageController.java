@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class MessageController {
+
     private static final String MESSAGE = "/message";
 
     @Value("${message.for.demo.cloud}")

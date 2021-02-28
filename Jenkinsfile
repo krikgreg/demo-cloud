@@ -8,18 +8,11 @@ pipeline {
             }
         }
 
-       stage('test') {
-                steps {
-                    sh "mvn test"
-                }
-            }
-
         stage('deploy') {
             steps {
                 sh "mvn package"
             }
         }
-
 
         stage('Build Docker image'){
             steps {
@@ -45,8 +38,7 @@ pipeline {
 
         stage('Docker deploy'){
             steps {
-
-                sh 'docker run -itd -p  8081:8080 skrynnyk/demo-cloud:latest'
+                sh 'docker run -itd -p 8081:8080 skrynnyk/demo-cloud:latest'
             }
         }
     }
