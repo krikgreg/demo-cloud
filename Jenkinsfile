@@ -8,9 +8,9 @@ pipeline {
             }
         }
 
-        stage('Tests') {
+        stage('test') {
             steps {
-            				sh "junit '/tmp/junit/test-result.xml'"
+            				sh "mvn test"
                   }
             }
 
@@ -47,5 +47,10 @@ pipeline {
                 sh 'docker run -itd -p 8080:8080 skrynnyk/demo-cloud:latest'
             }
         }
+        post {
+                always {
+                    junit 'tmp/junit/test-result.xml'
+                }
+            }
     }
 }
