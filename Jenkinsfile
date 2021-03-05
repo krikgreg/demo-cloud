@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'EC2' }
     stages {
         stage('Compile and Clean') {
             steps {
@@ -38,7 +38,7 @@ pipeline {
 
         stage('Docker deploy'){
             steps {
-                sh 'docker run -itd -p 8081:8080 skrynnyk/demo-cloud:latest'
+                sh 'docker run -itd -p 8080:8080 skrynnyk/demo-cloud:latest'
             }
         }
     }
