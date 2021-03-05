@@ -8,9 +8,9 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('Tests') {
             steps {
-            				sh "mvn test"
+            				sh "junit '/tmp/junit/test-result.xml'"
                   }
             }
 
