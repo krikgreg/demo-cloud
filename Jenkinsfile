@@ -50,7 +50,7 @@ pipeline {
     }
     post {
            always {
-                junit '/root/workspace/DemoDeployment/target/surefire-reports/TEST-com.epam.cloud.DemoApplicationTests.xml'
+                junit '**/target/surefire-reports/*.xml'
                  }
           }
 }
