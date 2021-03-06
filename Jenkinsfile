@@ -42,9 +42,16 @@ pipeline {
             }
         }
 
+        stage('Stop previous containers'){
+                    steps {
+                        sh 'docker ps -f name=dockerContainer -q | xargs --no-run-if-empty docker container stop'
+                   					sh 'docker container ls -a -fname=dockerContainer -q | xargs -r docker container rm'
+                    }
+                }
+
         stage('Docker deploy'){
             steps {
-                sh 'docker run -itd -p 8080:8080 skrynnyk/demo-cloud:latest'
+                sh 'docker run -d -p 8080:8080 --rm --name dockerContainer skrynnyk/demo-cloud:latest'
             }
         }
     }
