@@ -50,7 +50,7 @@ pipeline {
     }
     post {
            always {
-                junit 'tmp/junit/test-result.xml'
+                junit '**/test-results/*.xml'
                  }
           }
 }
