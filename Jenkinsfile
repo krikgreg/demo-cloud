@@ -8,6 +8,7 @@ void setBuildStatus(String message, String state) {
   ]);
 }
 
+def response = httpRequest 'http://172.31.38.207:8080/cloud/api/health'
 
 pipeline {
     agent { label 'EC2' }
@@ -63,7 +64,6 @@ pipeline {
         stage('Docker deploy'){
             steps {
                 sh 'docker run -d -p 8080:8080 --rm --name dockerContainer skrynnyk/demo-cloud:latest'
-                def response = httpRequest 'http://172.31.38.207:8080/cloud/api/health'
                 println("Status: "+response.status)
             }
         }
