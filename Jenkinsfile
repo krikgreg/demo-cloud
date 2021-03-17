@@ -1,13 +1,3 @@
-void setBuildStatus(String message, String state) {
-  step([
-      $class: "GitHubCommitStatusSetter",
-      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/krikgreg/demo-cloud"],
-      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
-      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
-      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
-  ]);
-}
-
 def response = httpRequest 'http://172.31.38.207:8080/cloud/api/health'
 
 pipeline {
@@ -64,7 +54,7 @@ pipeline {
         stage('Docker deploy'){
             steps {
                 sh 'docker run -d -p 8080:8080 --rm --name dockerContainer skrynnyk/demo-cloud:latest'
-                println("Status: "+response.status)
+                println("Health check request returns status: "+response.status)
             }
         }
     }
@@ -72,11 +62,5 @@ pipeline {
            always {
                 junit '**/target/surefire-reports/*.xml'
                  }
-           success {
-                   setBuildStatus("Build succeeded", "SUCCESS");
-               }
-           failure {
-                  setBuildStatus("Build failed", "FAILURE");
-               }
           }
 }
