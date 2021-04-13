@@ -1,6 +1,6 @@
 package com.epam.cloud.controller;
 
-import com.epam.cloud.data.Health;
+import com.epam.cloud.data.HealthData;
 import com.epam.cloud.service.imp.HealthCheckServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class HealthCheckController {
     private HealthCheckServiceImpl healthCheckService;
 
     @GetMapping(HEALTH)
-    public Health checkHealth(){
+    public HealthData checkHealth(){
         return healthCheckService.checkHealth();
     }
 }

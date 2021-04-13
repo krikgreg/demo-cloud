@@ -1,6 +1,6 @@
 package com.epam.cloud.service.imp;
 
-import com.epam.cloud.data.Health;
+import com.epam.cloud.data.HealthData;
 import com.epam.cloud.service.HealhCheckService;
 import org.springframework.stereotype.Service;
 
@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class HealthCheckServiceImpl implements HealhCheckService {
     @Override
-    public Health checkHealth() {
+    public HealthData checkHealth() {
         int errorCode = check();
         if (errorCode != 0) {
-            return Health.down()
+            return HealthData.down()
                     .withDetail("Error Code", errorCode).build();
         }
-        return Health.up().build();
+        return HealthData.up().build();
     }
 
     public int check() {

@@ -7,11 +7,12 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Health {
+public class HealthData
+{
     private final Status status;
     private final Map<String, Object> details;
 
-    private Health(Builder builder) {
+    private HealthData(Builder builder) {
         this.status = builder.status;
         this.details = Collections.unmodifiableMap(builder.details);
     }
@@ -47,8 +48,8 @@ public class Health {
         if (obj == this) {
             return true;
         }
-        if (obj instanceof Health) {
-            Health other = (Health) obj;
+        if (obj instanceof HealthData) {
+            HealthData other = (HealthData) obj;
             return this.status.equals(other.status) && this.details.equals(other.details);
         }
         return false;
@@ -69,7 +70,7 @@ public class Health {
             this.details = new LinkedHashMap<>();
         }
 
-        public Health.Builder status(Status status) {
+        public HealthData.Builder status(Status status) {
             this.status = status;
             return this;
         }
@@ -79,8 +80,8 @@ public class Health {
             return this;
         }
 
-        public Health build() {
-            return new Health(this);
+        public HealthData build() {
+            return new HealthData(this);
         }
 
     }

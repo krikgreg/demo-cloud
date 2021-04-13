@@ -1,7 +1,7 @@
 package com.epam.cloud.service;
 
-import com.epam.cloud.data.Health;
+import com.epam.cloud.data.HealthData;
 
 public interface HealhCheckService {
-    public Health checkHealth();
+    public HealthData checkHealth();
 }
